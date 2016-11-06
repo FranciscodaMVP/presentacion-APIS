@@ -96,4 +96,4 @@ db.sqlite3
 *.swp
 
 #migraciones
-codeBlue/migrations/
+presentacion/migrations/

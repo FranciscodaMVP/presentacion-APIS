@@ -4,4 +4,4 @@ from django.core.urlresolvers import reverse_lazy
 # Create your views here.
 
 def index(request):
-    return render(request, 'main.html')
+    return render(request, 'expo.html')

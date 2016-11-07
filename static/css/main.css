@@ -909,7 +909,7 @@ h3.succes_message {
 	z-index:9;
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 	filter: alpha(opacity=80);
-	opacity: 0.8;
+	opacity: 0.2;
 }
 
 /* Preloader */

@@ -108,8 +108,37 @@
             <pre><code class="hljs">from apiclient.discovery import build
 service = build('api_name', 'api_version', ...)</code></pre>
           </section>
+          <section>
+            <h2>Collection</h2>
+            <p>Represents a resource.</p>
+            <pre><code class="hljs">collection = service.url()</code></pre>
+          </section>
+          <section>
+            <h2>Collection method</h2>
+            <p>Returns a HttpRequest but doesn't send it.</p>
+            <pre><code class="hljs">request = collection.get(shortUrl='url')</code></pre>
+          </section>
+          <section>
+            <h2>Execution</h2>
+            <p>To execute the request and get a response we call the execute() method.</p>
+            <pre><code class="hljs">response = request.execute()</code></pre>
+          </section>
+          <section>
+            <h2>Response</h2>
+            <p>The response is a dictionary.</p>
+            <pre><code class="hljs">{
+  "kind": "urlshortener#url",
+  "id": "https://goo.gl/yBCFkX",
+  "longUrl": "https://developers.google.com/resources/api-libraries/documentation/urlshortener/v1/python/latest/urlshortener_v1.url.html"
+}</code></pre>
+          </section>
         </section>
 
+        <section>
+          <section>
+            <h2>Examples</h2>
+          </section>
+        </section>
 			</div>
 		</div>
 

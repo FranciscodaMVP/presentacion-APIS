@@ -81,11 +81,12 @@
             <ul>
               <li>Accesses private user data.</li>
               <li>Before calling them, user must grant your app access to their data.</li>
+              <li>Needs client ID and client secret.</li>
             </ul>
           </section>
 					<section style="text-align: left;">
 						<p>Using some of this APIs require authorization.</p>
-						<p><strong>Requirements<strong></p>
+						<p><strong>Requirements</strong></p>
 							<ul>
 								<li><strong>Credentials</strong></li>
 								<li>Access Token</li>
@@ -93,6 +94,21 @@
 							</ul>
 					</section>
 				</section>
+
+        <section>
+          <section>
+            <h2>Client Library for Python</h2>
+          </section>
+          <section>
+            <h2>Installation</h2>
+            <pre><code class="hljs">$ pip install --upgrade google-api-python-client</code></pre>
+          </section>
+          <section>
+            <h2>Service object</h2>
+            <pre><code class="hljs">from apiclient.discovery import build
+service = build('api_name', 'api_version', ...)</code></pre>
+          </section>
+        </section>
 
 			</div>
 		</div>

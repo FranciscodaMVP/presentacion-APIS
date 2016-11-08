@@ -1,71 +1,71 @@
 {% load static %}
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Google APIs</title>
+    <title>Google APIs</title>
 
-		<link rel="stylesheet" href="{% static 'reveal.js/css/reveal.css' %}">
-		<link rel="stylesheet" href="{% static 'reveal.js/css/theme/sky.css' %}">
+    <link rel="stylesheet" href="{% static 'reveal.js/css/reveal.css' %}">
+    <link rel="stylesheet" href="{% static 'reveal.js/css/theme/sky.css' %}">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="{% static 'reveal.js/lib/css/zenburn.css' %}">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<!-- cambio de seccion-->
-				<section>
-					<h1 style="text-transform: none"> Google APIs</h1>
-					<h2> Grey Team</h2>
-					<ul>
-						<li>Web Programming</li>
-						<li>Wednesday November 9, 2016</li>
-					</ul>
-				</section>
-				<!-- cambio de seccion-->
-				<section data-background="{% static 'images/header-image/wat2.gif' %}"></section>
-				<!-- cambio de seccion-->
-				<section data-background-transition="concave">
-					<section style="text-align: left;">
-						<h2>APIs</h2>
-						<h4>Application Programming Interfaces</h4>
-						<p>Google provided APIs, which allow communication with Google Services and their integration to other services</p>
-						<ul>
-							<li>Search</li>
-							<li>Gmail</li>
-							<li>Translate</li>
-							<li>Maps</li>
-						</ul>
-					</section>
-					<section style="text-align: left;">
-						<h2>Common Uses</h2>
-						<ul>
-							<li>User Registration</li>
-							<li>Drive Apps</li>
-							<li>Custom Search</li>
-							<li>App Engine apps</li>
-							<li>Gadgets</li>
-						</ul>
-					</section>
-					<section style="text-align: left;">
-						<h2>Client Libraries</h2>
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="{% static 'reveal.js/lib/css/zenburn.css' %}">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- cambio de seccion-->
+        <section>
+          <h1 style="text-transform: none"> Google APIs</h1>
+          <h2> Grey Team</h2>
+          <ul>
+            <li>Web Programming</li>
+            <li>Wednesday November 9, 2016</li>
+          </ul>
+        </section>
+        <!-- cambio de seccion-->
+        <section data-background="{% static 'images/header-image/wat2.gif' %}"></section>
+        <!-- cambio de seccion-->
+        <section data-background-transition="concave">
+          <section style="text-align: left;">
+            <h2>APIs</h2>
+            <h4>Application Programming Interfaces</h4>
+            <p>Google provided APIs, which allow communication with Google Services and their integration to other services</p>
+            <ul>
+              <li>Search</li>
+              <li>Gmail</li>
+              <li>Translate</li>
+              <li>Maps</li>
+            </ul>
+          </section>
+          <section style="text-align: left;">
+            <h2>Common Uses</h2>
+            <ul>
+              <li>User Registration</li>
+              <li>Drive Apps</li>
+              <li>Custom Search</li>
+              <li>App Engine apps</li>
+              <li>Gadgets</li>
+            </ul>
+          </section>
+          <section style="text-align: left;">
+            <h2>Client Libraries</h2>
             <p>Provided by Google to make it easier to access the APIs from different languages.</p>
-						<ul>
-							<li><strong>Python</strong></li>
-							<li>Java</li>
-							<li>JavaScript</li>
-							<li>.NET</li>
-							<li>Objective-C</li>
-							<li>PHP</li>
-						</ul>
-					</section>
-				</section>
-				<!-- cambio de seccion-->
-				<section>
-					<section>
+            <ul>
+              <li><strong>Python</strong></li>
+              <li>Java</li>
+              <li>JavaScript</li>
+              <li>.NET</li>
+              <li>Objective-C</li>
+              <li>PHP</li>
+            </ul>
+          </section>
+        </section>
+        <!-- cambio de seccion-->
+        <section>
+          <section>
             <h2>Authentication and Autorization</h2>
             <p style="text-align: left;">All API calls must use either simple or authorized access. Many API methods required authorized access, but some can use either.</p>
           </section>
@@ -84,16 +84,16 @@
               <li>Needs client ID and client secret.</li>
             </ul>
           </section>
-					<section style="text-align: left;">
-						<p>Using some of this APIs require authorization.</p>
-						<p><strong>Requirements</strong></p>
-							<ul>
-								<li><strong>Credentials</strong></li>
-								<li>Access Token</li>
-								<li>Use the Token for Authorization</li>
-							</ul>
-					</section>
-				</section>
+          <section style="text-align: left;">
+            <p>Using some of this APIs require authorization.</p>
+            <p><strong>Requirements</strong></p>
+              <ul>
+                <li><strong>Credentials</strong></li>
+                <li>Access Token</li>
+                <li>Use the Token for Authorization</li>
+              </ul>
+          </section>
+        </section>
 
         <section>
           <section>
@@ -141,25 +141,25 @@ service = build('api_name', 'api_version', ...)</code></pre>
             <h2>Examples</h2>
           </section>
         </section>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<script src="{% static 'reveal.js/lib/js/head.min.js' %}"></script>
-		<script src="{% static 'reveal.js/js/reveal.js' %}"></script>
+    <script src="{% static 'reveal.js/lib/js/head.min.js' %}"></script>
+    <script src="{% static 'reveal.js/js/reveal.js' %}"></script>
 
-		<script>
-			// More info https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				history: true,
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
 
-				// More info https://github.com/hakimel/reveal.js#dependencies
-				dependencies: [
-					{ src: '{% static 'reveal.js/plugin/markdown/marked.js' %}' },
-					{ src: '{% static 'reveal.js/plugin/markdown/markdown.js' %}' },
-					{ src: '{% static 'reveal.js/plugin/notes/notes.js' %}', async: true },
-					{ src: '{% static 'reveal.js/plugin/highlight/highlight.js' %}', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: '{% static 'reveal.js/plugin/markdown/marked.js' %}' },
+          { src: '{% static 'reveal.js/plugin/markdown/markdown.js' %}' },
+          { src: '{% static 'reveal.js/plugin/notes/notes.js' %}', async: true },
+          { src: '{% static 'reveal.js/plugin/highlight/highlight.js' %}', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
 </html>

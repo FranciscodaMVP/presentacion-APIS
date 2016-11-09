@@ -73,7 +73,7 @@ def calendar_add_event(request, event_id):
 def calendar_auth_return(request):
     if not xsrfutil.validate_token(
             settings.SECRET_KEY,
-            str(request.GET['state']),
+            bytes(request.GET['state'], 'utf-8'),
             request.user):
         return  HttpResponseBadRequest()
     credential = FLOW.step2_exchange(request.GET)

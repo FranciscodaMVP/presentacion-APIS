@@ -124,3 +124,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #LOGIN_URL = reverse_lazy('start')
 #LOGIN_REDIRECT_URL = reverse_lazy('start')
 #LOGOUT_URL = reverse_lazy('login')
+
+GOOGLE_OAUTH2_CLIENT_ID = '429472129896-vd12hnrgeqnh30g9tvs1vigj52d8rv9f.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'MMDnrj21VGACpG-TMZ6gVDVV'

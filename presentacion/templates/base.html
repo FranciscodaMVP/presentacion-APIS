@@ -16,6 +16,9 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/main.css' %}">
 <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/skins/blue.css' %}" data-name="skins">
 
+<!--Syntax highlighting-->
+<link rel="stylesheet" href="{% static 'reveal.js/lib/css/zenburn.css' %}">
+
 <!--google font style-->
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <!--font-family: 'Metrophobic', sans-serif;-->
@@ -52,13 +55,12 @@
                   </div>
                   <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav" id="navigation">
-                      <li class="menuItem" id="home"><a href="#wrapper">main</a></li>
-                      <li class="menuItem"><a href="#features">api's</a></li>
-                      <li class="menuItem"><a href="#courses">auth keys</a></li>
-                      <li class="menuItem"><a href="#teachers">maps</a></li>
-                      <li class="menuItem"><a href="#pricing">translate</a></li>
-                      <li class="menuItem"><a href="#testimonial">shortener</a></li>
-                      <li class="menuItem"><a href="#contact">calendar</a></li>
+                      <li class="menuItem" id="home"><a href="{% url 'index' %} ">Expo</a></li>
+                      <li class="menuItem"><a href="#teachers">Maps</a></li>
+                      <li class="menuItem"><a href="#pricing">Translate</a></li>
+                      <li class="menuItem"><a href="#testimonial">URL Shortener</a></li>
+                      <li class="menuItem"><a href="{% url 'calendar' %}">Calendar</a></li>
+                      <li class="menuItem"><a href="#contact">Drive</a></li>
                     </ul>
                   </div>
                 </nav>
@@ -293,5 +295,9 @@ function count(options) {
 
 <!--for theme custom jquery-->
 <script src="{% static 'js/custom.js' %}"></script>
+
+<!--Syntax highlighting-->
+<script src="{% static 'reveal.js/plugin/highlight/highlight.js' %}"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

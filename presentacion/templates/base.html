@@ -30,7 +30,7 @@
 <!-- font icon css style-->
 <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
 </head>
-<body onLoad="load()" onUnload="GUnload()">
+<body>
 
 <!--wrapper start-->
 <div class="wrapper" id="wrapper">
@@ -114,7 +114,6 @@
 <script type="text/javascript" src="{% static 'js/jquery.placeholder.js' %}"></script>
 
 <!--for header jquery-->
-<script type="text/javascript" src="{% static 'js/stickUp.js' %}"></script>
 <script src="{% static 'js/jquery.superslides.js' %}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 "use strict";
@@ -139,34 +138,8 @@
 <script type="text/javascript" src="{% static 'js/jquery.contact.js' %}"></script>
 <!--Newsletter js-->
 <script type="text/javascript" src="{% static 'js/jquery.subscribe.js' %}"></script>
-<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAAjU0EJWnWPMv7oQ-jjS7dYxSPW5CJgpdgO_s4yyMovOaVh_KvvhSfpvagV18eOyDWu7VytS6Bi1CWxw" type="text/javascript"></script>
-<script type="text/javascript">
-"use strict";
-    //<![CDATA[
-    var map;
-
-    function load() {
-      if (GBrowserIsCompatible()) {
-        map = new GMap2(document.getElementById("map"));
-        map.setCenter(new GLatLng(-37.817682, 144.957595), 13);
-        document.getElementById("map").checked = true;
-        toggleZoom(false);
-      }
-    }
-
-    function toggleZoom(isChecked) {
-      if (isChecked) {
-        map.enableScrollWheelZoom();
-      } else {
-        map.disableScrollWheelZoom();
-      }
-    }
-
-    //]]>
-</script>
 
 <!--about jquery-->
-<script src="{% static 'js/jquery.classyloader.min.js' %}"></script>
 <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
 <script src="{% static 'js/jquery.easing.js' %}"></script>
 <script src="{% static 'js/jquery.mousewheel.js' %}"></script>
@@ -184,22 +157,6 @@
 jQuery(function($) {
 $(document).ready( function() {
   //enabling stickUp on the '.navbar-wrapper' class
-	$('.navbar-wrapper').stickUp({
-		parts: {
-		  0: 'banner',
-		  1: 'features',
-		  2: 'courses',
-		  3: 'teachers',
-		  4: 'pricing',
-		  5: 'testimonial',
-		  6: 'blog',
-		  7: 'contact'
-		},
-		itemClass: 'menuItem',
-		itemHover: 'active',
-		topMargin: 'auto'
-		});
-
 		// Video responsive
 		if ($(window).width()<400){
 			$('.lb_mixed').rlightbox({
@@ -258,26 +215,6 @@ $(document).ready( function() {
 			$(".testimonialText li:eq("+gi+")").fadeTo("fast",1);
 			}
 	})
-
-	// Video lightbox
-	$("a[data-rel^='prettyPhoto']").prettyPhoto();
-
-	// for client work jquary
-	var windowBottom = $(window).height()+0;
-	var index=0;
-	$(document).scroll(function(){
-		divposition = parseInt($('.factabout').offset().top),10;
-		divsrollpos = parseInt($(window).scrollTop()),10;
-		ctop = parseInt(divposition-divsrollpos),10;
-		if(ctop<Math.round(windowBottom/2)){
-			if(index==0){
-
-				$('.timer').each(count);
-
-			}
-			index++;
-		}
-	});
 
 
 

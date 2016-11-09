@@ -17,11 +17,20 @@
 
     <script type="text/javascript">
         function initMap() {
+
+            var itt = {lat: 32.530140, lng: -116.987100};
+            var uabc = {lat: 32.531497, lng: -116.960476};
+            var utt = {lat: 32.461109, lng: -116.825585};
+
+            var tijuana = {lat: 32.532714, lng: -117.018911};
+            var cdmx = {lat: 19.433715, lng: -99.133141};
+            var mordor = {lat: 38.898728, lng: -77.036594};
+
             var mapCanvas = document.getElementById("map");
 
             var mapOptions = {
-                zoom: 5,
-                center: {lat: 32.530140, lng: -116.987100},
+                zoom: 11,
+                center: itt,
                 mapTypeId: google.maps.MapTypeId.TERRAIN
                 // ROADMAP (normal, default 2D map)
                 // SATELLITE (photographic map)
@@ -32,31 +41,29 @@
 
             var map = new google.maps.Map(mapCanvas, mapOptions);
 
-            var myCenter = {lat: 32.530140, lng: -116.987100}
             var marker1 = new google.maps.Marker({
-                position: myCenter
+                position: itt
             });
 
             marker1.setMap(map);
 
             var marker2 = new google.maps.Marker({
-                position: {lat: 32.664069, lng: -115.469101},
+                position: uabc,
                 animation: google.maps.Animation.BOUNCE
             });
 
             marker2.setMap(map);
 
             var marker3 = new google.maps.Marker({
-                position: {lat: 32.461109, lng: -116.825585},
-                animation: google.maps.Animation.DROP
+                position: utt
             });
 
             marker3.setMap(map);
 
             var routePoints = [
-                {lat: 32.530140, lng: -116.987100},
-                {lat: 32.664069, lng: -115.469101},
-                {lat: 32.461109, lng: -116.825585}
+                tijuana,
+                cdmx,
+                mordor
             ];
 
             var route = new google.maps.Polyline({
@@ -70,9 +77,9 @@
             route.setMap(map);
 
             var polygonPoints = [
-                {lat: 32.530140, lng: -116.987100},
-                {lat: 32.664069, lng: -115.469101},
-                {lat: 32.461109, lng: -116.825585}
+                itt,
+                uabc,
+                utt
             ];
 
             var polygon = new google.maps.Polygon({
@@ -112,6 +119,69 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCID6HksHlVeF0MHr1Mw9lEjGNx-rr9Pbw&callback=initMap"
     async defer></script>
+
+    <section class="white_section section_gap" id="features">
+        <div class="container">
+            <div class="heading">
+                <h1><span>Google</span>Maps</h1>
+                <p>The Google Maps API allows us to obtain a map of our planet where we can place markers, routes, figures, etc. to identify specific places or zones.</p>
+                <p>Maps provides us with functions with which we can interact with the map, which in turn, have a series of specific options with which we can customize the objects that these functions put us on the map.</p>
+                <p>We can create a new map using google.maps function <code>Map()</code>, which accepts as parameters the HTML element where the map will be placed and the options for the map.</p>
+                <pre>
+                    <code class="hljs">
+                        var htmlElement = document.getElementById("map");
+
+                        var mapOptions = {
+                            zoom: 11,
+                            center: {lat: 32.530140, lng: -116.987100},
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+
+                        var map = new google.maps.Map(htmlElement, mapOptions);
+                    </code>
+                </pre>
+                <p>Within the map we can place markers to locate places. To do this, we can use <code>Marker()</code> function of google.maps to place as many markers as we want.</p>
+                <pre>
+                    <code>
+                        var myMarker = new google.maps.Marker({
+                            position: {lat: 32.530140, lng: -116.987100}
+                        });
+                    </code>
+                </pre>
+                <p>At a minimum, the marker must have a location specified. Finally, to add the marker to the map we must use the following instruction.</p>
+                <pre>
+                    <code>
+                        myMarker.setMap(map);
+                    </code>
+                </pre>
+                <p>Another thing we can do is place routes. We can create perzonalized routes by drawing lines on the map with <code>Polyline()</code> function, also from google.maps.</p>
+                <pre>
+                    <code>
+                        var routePoints = [
+                            {lat: 32.532714, lng: -117.018911},
+                            {lat: 19.433715, lng: -99.133141},
+                            {lat: 38.898728, lng: -77.036594}
+                        ];
+
+                        var route = new google.maps.Polyline({
+                            path: routePoints,
+                            geodesic: true,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
+                    </code>
+                </pre>
+                <p>And finally, we can add to the map in the same way as with the markers, through the function <code>setMap()</code>.</p>
+                <pre>
+                    <code>
+                       route.setMap(map);
+                    </code>
+                </pre>
+                <p>For more information about the other features of Google Maps visit this <a href="https://developers.google.com/maps/documentation/javascript/?hl=es-419">page</a>.</p>
+            </div>
+        </div>
+    </section>
 
     <div id="map"></div>
 

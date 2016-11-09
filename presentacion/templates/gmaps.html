@@ -6,7 +6,7 @@
 
     <style>
       #map {
-        height: 100%;
+        height: 500px;
       }
       html, body {
         height: 100%;
@@ -32,6 +32,7 @@
 
             var map = new google.maps.Map(mapCanvas, mapOptions);
 
+            var myCenter = {lat: 32.530140, lng: -116.987100}
             var marker1 = new google.maps.Marker({
                 position: myCenter
             });

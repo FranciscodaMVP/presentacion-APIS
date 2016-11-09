@@ -20,21 +20,21 @@ FLOW = OAuth2WebServerFlow(
     settings.GOOGLE_OAUTH2_CLIENT_ID,
     settings.GOOGLE_OAUTH2_CLIENT_SECRET,
     scope='https://www.googleapis.com/auth/calendar',
-    redirect_uri='http://127.0.0.1:8000/oauth2callback'
+    redirect_uri='http://localhost:8000/calendar/oauth2callback'
 )
 
 def index(request):
     return render(request, 'expo.html')
 
 def calendar(request):
-    context = { 
-        'events': Event.objects.all(), 
+    context = {
+        'events': Event.objects.all(),
     }
     return render(request, 'calendar.html', context)
 
 def calendar_eventadded(request):
-    context = { 
-        'events': Event.objects.all(), 
+    context = {
+        'events': Event.objects.all(),
         'event_added': True,
     }
     return render(request, 'calendar.html', context)
@@ -51,7 +51,7 @@ def calendar_add_event(request, event_id):
         FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
                                                        request.user)
         authorize_url = FLOW.step1_get_authorize_url()
-        return HttpResponseRedirect(authorize_url)
+        return redirect(authorize_url)
     else:
         http = httplib2.Http()
         http = credential.authorize(http)
@@ -90,8 +90,8 @@ def shortener(request):
             short_url = form.cleaned_data['url']
 
             url_service = build(
-                'urlshortener', 
-                'v1', 
+                'urlshortener',
+                'v1',
                 developerKey=settings.GOOGLE_API_KEY,
             )
             resp = url_service.url().get(shortUrl=short_url).execute()

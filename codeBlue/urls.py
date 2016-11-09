@@ -16,4 +16,7 @@ urlpatterns = [
 
     # URL shortener
     url(r'^shortener/$', views.shortener, name="shortener"),
+
+    # Google Maps
+    url(r'^maps/$', views.maps, name="gmaps"),
 ]

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <script type="text/javascript">
+        function initMap() {
+            var mapCanvas = document.getElementById("map");
+
+            var mapOptions = {
+                zoom: 5,
+                center: {lat: 32.530140, lng: -116.987100},
+                mapTypeId: google.maps.MapTypeId.TERRAIN
+                // ROADMAP (normal, default 2D map)
+                // SATELLITE (photographic map)
+                // HYBRID (photographic map + roads and city names)
+                // TERRAIN (map with mountains, rivers, etc.)
+
+            };
+
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+
+            var marker1 = new google.maps.Marker({
+                position: myCenter
+            });
+
+            marker1.setMap(map);
+
+            var marker2 = new google.maps.Marker({
+                position: {lat: 32.664069, lng: -115.469101},
+                animation: google.maps.Animation.BOUNCE
+            });
+
+            marker2.setMap(map);
+
+            var marker3 = new google.maps.Marker({
+                position: {lat: 32.461109, lng: -116.825585},
+                animation: google.maps.Animation.DROP
+            });
+
+            marker3.setMap(map);
+
+            var routePoints = [
+                {lat: 32.530140, lng: -116.987100},
+                {lat: 32.664069, lng: -115.469101},
+                {lat: 32.461109, lng: -116.825585}
+            ];
+
+            var route = new google.maps.Polyline({
+                path: routePoints,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            route.setMap(map);
+
+            var polygonPoints = [
+                {lat: 32.530140, lng: -116.987100},
+                {lat: 32.664069, lng: -115.469101},
+                {lat: 32.461109, lng: -116.825585}
+            ];
+
+            var polygon = new google.maps.Polygon({
+                path: polygonPoints,
+                strokeColor: "#0000FF",
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: "#0000FF",
+                fillOpacity: 0.4
+            });
+
+            polygon.setMap(map);
+
+            var infowindow1 = new google.maps.InfoWindow({
+                content: "Instituto Tecnologico de Tijuana"
+            });
+
+            infowindow1.open(map, marker1);
+
+            var infowindow2 = new google.maps.InfoWindow({
+                content: "Universidad Autonoma de Baja California"
+            });
+
+            marker2.addListener('click', function() {
+                infowindow2.open(map, marker2);
+            });
+
+            var infowindow3 = new google.maps.InfoWindow({
+                content: "Universidad Tecnologica de Tijuana"
+            });
+
+            marker3.addListener('mouseover', function() {
+                infowindow3.open(map, marker3);
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCID6HksHlVeF0MHr1Mw9lEjGNx-rr9Pbw&callback=initMap"
+    async defer></script>
+
+    <div id="map"></div>
+
+{% endblock %}

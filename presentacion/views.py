@@ -99,3 +99,6 @@ def shortener(request):
 
     context['form'] = form
     return render(request, 'shortener.html', context)
+
+def maps(request):
+    return render(request, 'gmaps.html')

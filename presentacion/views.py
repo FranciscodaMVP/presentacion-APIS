@@ -26,7 +26,16 @@ def index(request):
     return render(request, 'expo.html')
 
 def calendar(request):
-    context = { 'events' : Event.objects.all() }
+    context = { 
+        'events': Event.objects.all(), 
+    }
+    return render(request, 'calendar.html', context)
+
+def calendar_eventadded(request):
+    context = { 
+        'events': Event.objects.all(), 
+        'event_added': True,
+    }
     return render(request, 'calendar.html', context)
 
 def calendar_add_event(request, event_id):
@@ -58,14 +67,14 @@ def calendar_add_event(request, event_id):
             body=body,
         )
         response = calendar_request.execute()
-        return redirect('calendar')
+        return redirect('calendar_eventadded')
 
 def calendar_auth_return(request):
-    #if not xsrfutil.validate_token(
-            #settings.SECRET_KEY,
-            #request.GET['state'],
-            #request.user):
-        #return  HttpResponseBadRequest()
+    if not xsrfutil.validate_token(
+            settings.SECRET_KEY,
+            str(request.GET['state']),
+            request.user):
+        return  HttpResponseBadRequest()
     credential = FLOW.step2_exchange(request.GET)
     storage = DjangoORMStorage(CredentialsModel, 'user', request.user, 'credential')
     storage.put(credential)

@@ -30,6 +30,10 @@ def calendar(request):
     context = {
         'events': Event.objects.all(),
     }
+    if CredentialsModel.objects.filter(user=request.user).count() > 0:
+        context['have_cred'] = True
+    else:
+        context['have_cred'] = False
     return render(request, 'calendar.html', context)
 
 def calendar_eventadded(request):
@@ -37,6 +41,11 @@ def calendar_eventadded(request):
         'events': Event.objects.all(),
         'event_added': True,
     }
+
+    if CredentialsModel.objects.filter(user=request.user).count() > 0:
+        context['have_cred'] = True
+    else:
+        context['have_cred'] = False
     return render(request, 'calendar.html', context)
 
 def calendar_add_event(request, event_id):

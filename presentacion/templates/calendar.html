@@ -24,12 +24,17 @@ calendar_request = calendar_service.events().insert(calendarId='primary', body=b
         <div class="alert alert-success" role="alert">The event has been added to your calendar.</div>
         {% endif %}
         <h2>Events</h2>
+        {% if have_cred == False %}
+          <p><a href="{% url 'add_event' 1 %}">Authorize access to your Google Calendar</a></p>
+        {% endif %}
         {% for event in events %}
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
           <div class="membership_listing"> <span><i class="fa fa-trophy"></i></span>
             <h3>{{ event.summary }}</h3>
             <p>{{ event.date }}</p>
+          {% if have_cred == True %}
             <p><a href="{% url 'add_event' event.pk %}">Add event</a></p>
+          {% endif %}
           </div>
         </div>
         {% endfor %}

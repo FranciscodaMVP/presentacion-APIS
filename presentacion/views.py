@@ -12,6 +12,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 
 from .models import CredentialsModel, Event
+from .forms import UrlForm
 
 # Create your views here.
 
@@ -79,3 +80,22 @@ def calendar_auth_return(request):
     storage = DjangoORMStorage(CredentialsModel, 'user', request.user, 'credential')
     storage.put(credential)
     return redirect('calendar')
+
+def shortener(request):
+    context = {}
+
+    form = UrlForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            short_url = form.cleaned_data['url']
+
+            url_service = build(
+                'urlshortener', 
+                'v1', 
+                developerKey=settings.GOOGLE_API_KEY,
+            )
+            resp = url_service.url().get(shortUrl=short_url).execute()
+            context['long_url'] = resp['longUrl']
+
+    context['form'] = form
+    return render(request, 'shortener.html', context)

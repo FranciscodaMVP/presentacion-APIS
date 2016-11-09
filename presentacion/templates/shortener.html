@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <!--Membership features start -->
+  <section class="white_section section_gap" id="features">
+    <div class="container">
+      <div class="heading">
+        <h1><span>Google</span>URL Shortener</h1>
+        <p>The URL Shortener API lets us create, inspect, and manage goo.gl short URLs.</p>
+        <p>It provides the collection <code>url()</code> that includes the methods:</p>
+        <ul>
+          <li><strong>get()</strong>: Expands a short URL or gets analytics.</li>
+          <li><strong>insert()</strong>: Creates a new short URL.</li>
+          <li><strong>list()</strong>: Gets a list of URLs shortened by a user.</li>
+        </ul>
+        <pre><code class="hljs">short_url = form.cleaned_data['url']
+
+            url_service = build(
+                'urlshortener', 
+                'v1', 
+                developerKey=settings.GOOGLE_API_KEY,
+            )
+            resp = url_service.url().get(shortUrl=short_url).execute()
+            context['long_url'] = resp['longUrl']</code></pre>
+      </div>
+      
+      <div class="row">
+        <h2>Expand a goo.gl URL</h2>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <form method="POST">
+          {% csrf_token %}
+          <p><label for="id_url">Url:</label> <input id="id_url" maxlength="200" name="url" type="text" value="http://goo.gl/l6MS" required style="width: 90%"/></p>
+          <input class="btn" type="submit" value="Expand">
+          </form>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+           {{ long_url }}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/Membership features end -->
+{% endblock %}

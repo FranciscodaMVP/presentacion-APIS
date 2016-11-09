@@ -7,7 +7,15 @@
     <div class="container">
       <div class="heading">
         <h1><span>Google</span>Calendar</h1>
-        <p>The Calendar API allows us to manipulate events and other calendar data.</p>
+        <p>The Calendar API allows us to manipulate events and other calendar data. We can create and delete calendars and events.</p>
+        <p>It provides the collection <code>events()</code> that includes the method <code>insert</code>, for adding events to the calendar of an user authenticated by OAuth. This method needs a the calendar ID and the body of the request as a dictionary.</p>
+        <pre><code class="hljs">calendar_service = build('calendar', 'v3', ...)
+body = {
+    'start': { "date": '2016-11-09' },
+    'end': { "date": '2016-11-10' },
+    'summary': 'Event name'
+}
+calendar_request = calendar_service.events().insert(calendarId='primary', body=body)</code></pre>
       </div>
       
       <div class="row">

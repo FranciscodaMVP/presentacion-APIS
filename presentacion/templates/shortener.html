@@ -16,13 +16,13 @@
         </ul>
         <pre><code class="hljs">short_url = form.cleaned_data['url']
 
-            url_service = build(
-                'urlshortener', 
-                'v1', 
-                developerKey=settings.GOOGLE_API_KEY,
-            )
-            resp = url_service.url().get(shortUrl=short_url).execute()
-            context['long_url'] = resp['longUrl']</code></pre>
+url_service = build(
+    'urlshortener',
+    'v1',
+    developerKey=settings.GOOGLE_API_KEY,
+)
+resp = url_service.url().get(shortUrl=short_url).execute()
+context['long_url'] = resp['longUrl']</code></pre>
       </div>
       
       <div class="row">

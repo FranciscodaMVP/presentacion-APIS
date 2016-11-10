@@ -11,16 +11,24 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.contrib import xsrfutil
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 
-from .models import CredentialsModel, Event
-from .forms import UrlForm, TransForm
+from .models import CredentialsModel, DriveCredentialsModel, Event
+from .forms import UrlForm
+
 
 # Create your views here.
 
-FLOW = OAuth2WebServerFlow(
+CALENDAR_FLOW = OAuth2WebServerFlow(
     settings.GOOGLE_OAUTH2_CLIENT_ID,
     settings.GOOGLE_OAUTH2_CLIENT_SECRET,
     scope='https://www.googleapis.com/auth/calendar',
     redirect_uri='http://localhost:8000/calendar/oauth2callback'
+)
+
+DRIVE_FLOW = OAuth2WebServerFlow(
+    settings.GOOGLE_OAUTH2_CLIENT_ID,
+    settings.GOOGLE_OAUTH2_CLIENT_SECRET,
+    scope='https://www.googleapis.com/auth/drive.metadata.readonly',
+    redirect_uri='http://localhost:8000/drive/oauth2callback'
 )
 
 def index(request):
@@ -57,9 +65,9 @@ def calendar_add_event(request, event_id):
     )
     credential = storage.get()
     if credential is None or credential.invalid == True:
-        FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
+        CALENDAR_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
                                                        request.user)
-        authorize_url = FLOW.step1_get_authorize_url()
+        authorize_url = CALENDAR_FLOW.step1_get_authorize_url()
         return redirect(authorize_url)
     else:
         http = httplib2.Http()
@@ -85,8 +93,50 @@ def calendar_auth_return(request):
             bytes(request.GET['state'], 'utf-8'),
             request.user):
         return  HttpResponseBadRequest()
-    credential = FLOW.step2_exchange(request.GET)
+    credential = CALENDAR_FLOW.step2_exchange(request.GET)
     storage = DjangoORMStorage(CredentialsModel, 'user', request.user, 'credential')
+    storage.put(credential)
+    return redirect('calendar')
+
+def drive(request):
+    context = {}
+
+    storage = DjangoORMStorage(
+        DriveCredentialsModel,
+        'user',
+        request.user,
+        'credential'
+    )
+    credential = storage.get()
+    if credential is None or credential.invalid == True:
+        DRIVE_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY,
+                                                       request.user)
+        authorize_url = DRIVE_FLOW.step1_get_authorize_url()
+        return redirect(authorize_url)
+    else:
+        http = httplib2.Http()
+        http = credential.authorize(http)
+
+        drive_service = build('drive', 'v3', http=http)
+        drive_request = drive_service.files().list(
+            pageSize = 10,
+            fields = 'nextPageToken, files(id, name)'
+        )
+        results = drive_request.execute()
+        drive_request = drive_service.files().list_next(drive_request, results)
+        results = drive_request.execute()
+        items = results.get('files', [])
+        context['items'] = items
+        return render(request, 'drive.html', context)
+
+def drive_auth_return(request):
+    if not xsrfutil.validate_token(
+            settings.SECRET_KEY,
+            bytes(request.GET['state'], 'utf-8'),
+            request.user):
+        return  HttpResponseBadRequest()
+    credential = DRIVE_FLOW.step2_exchange(request.GET)
+    storage = DjangoORMStorage(DriveCredentialsModel, 'user', request.user, 'credential')
     storage.put(credential)
     return redirect('calendar')
 

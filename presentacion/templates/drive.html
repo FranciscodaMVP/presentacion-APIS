@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <!--Membership features start -->
+  <section class="white_section section_gap" id="features">
+    <div class="container">
+      <div class="heading">
+        <h1><span>Google</span>Drive</h1>
+        <p>The Google Drive API is used to manage files in Drive. With this API we can upload, download and search files. We can also Detect changes and update sharing permissions. It required OAuth authentication from the user.</p>
+        <pre><code class="hljs">
+drive_service = build('drive', 'v3', http=http)
+drive_request = drive_service.files().list(
+    pageSize = 10,
+    fields = 'nextPageToken, files(id, name)'
+)
+results = drive_request.execute()
+drive_request = drive_service.files().list_next(drive_request, results)
+results = drive_request.execute()
+items = results.get('files', [])
+context['items'] = items
+return render(request, 'drive.html', context)
+        </code></pre>
+        <p></p>
+      </div>
+      
+      <div class="row">
+        <h2>Files</h2>
+        {% if not items %}
+        <p>No items found.</p>
+        {% endif %}
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul>
+        {% for item in items %}
+            <li>{{ item.id }} - {{ item.name }}</li>
+        {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/Membership features end -->
+{% endblock %}

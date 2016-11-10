@@ -12,7 +12,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 
 from .models import CredentialsModel, Event
-from .forms import UrlForm
+from .forms import UrlForm, TransForm
 
 # Create your views here.
 
@@ -111,3 +111,24 @@ def shortener(request):
 
 def maps(request):
     return render(request, 'gmaps.html')
+
+def translate(request):
+    context = {}
+
+    form = TransForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            trans = form.cleaned_data['text']
+
+            url_service = build(
+                'translate', 'v2',
+                developerKey=settings.GOOGLE_API_KEY,
+            )
+            resp = url_service.translations().list(
+                source='en',
+                target='es',
+                q=trans).execute()
+            context['translated'] = resp['translations'][0]['translatedText']
+
+    context['form'] = form
+    return render(request, 'translate.html', context)

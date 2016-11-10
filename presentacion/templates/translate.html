@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <!--Membership features start -->
+  <section class="white_section section_gap" id="features">
+    <div class="container">
+      <div class="heading">
+        <h1><span>Google</span>Translator</h1>
+        <p>With Google Translate API, you can dynamically translate text between thousands of language pairs.</p>
+        <p>The Google Translate API lets websites and programs integrate with Google Translate API programmatically.</p>
+        <p>It provides the collection <code>language()</code> that includes the methods:</p>
+
+        <ul>
+          <li><strong>detections()</strong>: Detect the language of text.</li>
+          <li><strong>language()</strong>: List the source/target languages supported by the API.</li>
+          <li><strong>translation()</strong>: Returns text translations from one language to another.</li>
+        </ul>
+        <pre><code class="hljs">short_url = form.cleaned_data['url']
+
+            url_service = build(
+                'urlshortener',
+                'v1',
+                developerKey=settings.GOOGLE_API_KEY,
+            )
+            resp = url_service.url().get(shortUrl=short_url).execute()
+            context['long_url'] = resp['longUrl']</code></pre>
+      </div>
+
+      <div class="row">
+        <h2>Translate to Spanish</h2>
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <form method="POST">
+          {% csrf_token %}
+          <p><label for="id_url">Text:</label> <input id="id_url" maxlength="200" name="text" type="text" value="" required style="width: 90%"/></p>
+          <input class="btn" type="submit" value="Expand">
+          </form>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+           {{ translated }}
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/Membership features end -->
+{% endblock %}

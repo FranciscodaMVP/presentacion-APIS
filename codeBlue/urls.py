@@ -19,4 +19,7 @@ urlpatterns = [
 
     # Google Maps
     url(r'^maps/$', views.maps, name="gmaps"),
+
+    # Translate
+    url(r'^translate/$', views.translate, name="translator"),
 ]

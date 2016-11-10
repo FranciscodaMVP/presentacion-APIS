@@ -12,8 +12,7 @@ from oauth2client.contrib import xsrfutil
 from oauth2client.contrib.django_util.storage import DjangoORMStorage
 
 from .models import CredentialsModel, DriveCredentialsModel, Event
-from .forms import UrlForm
-
+from .forms import UrlForm, TransForm
 
 # Create your views here.
 

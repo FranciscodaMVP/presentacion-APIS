@@ -14,6 +14,12 @@ urlpatterns = [
     url(r'^calendar/add_event/(?P<event_id>[0-9]+)/$', views.calendar_add_event, name="add_event"),
     url(r'^calendar/oauth2callback$', views.calendar_auth_return, name="calendar_auth_return"),
 
+    # Drive
+    url(r'^drive/$', views.drive, name="drive"),
+    #url(r'^calendar/event_added/$', views.calendar_eventadded, name="calendar_eventadded"),
+    #url(r'^calendar/add_event/(?P<event_id>[0-9]+)/$', views.calendar_add_event, name="add_event"),
+    url(r'^drive/oauth2callback$', views.drive_auth_return, name="drive_auth_return"),
+
     # URL shortener
     url(r'^shortener/$', views.shortener, name="shortener"),
 
